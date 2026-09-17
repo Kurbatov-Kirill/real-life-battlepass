@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           port: 22
           local_path: './'
-          remote_path: '/normvoobsh/irlbp/'
+          remote_path: '/home/n/normvoobsh/irlbp/'
           exclude: |
             .git/
             .github/
@@ -35,6 +35,6 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           port: 22
           script: |
-            cd /normvoobsh/irlbp/
+            cd /home/n/normvoobsh/irlbp/
             composer install --no-dev --optimize-autoloader --no-interaction
             php bin/console cache:clear --env=prod
