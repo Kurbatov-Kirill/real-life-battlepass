@@ -21,7 +21,8 @@ jobs:
           port: 22
           local_path: './'
           remote_path: '/home/n/normvoobsh/irlbp/'
-          sftp_only: true
+          sftp_only: false
+          exclude: '.git* .github* tests* .env.local'
 
       - name: Execute SSH commands (Composer & Cache)
         uses: appleboy/ssh-action@v1.0.3
