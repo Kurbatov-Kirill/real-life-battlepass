@@ -1,0 +1,45 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+!/var/cache/.gitkeep
+!/var/log/.gitkeep
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+/.phpunit/
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-profiler-bundle ###
+/_profiler/
+###< symfony/web-profiler-bundle ###
+
+###> Кэш, архивы и локальный инструмент Composer ###
+/cache/
+/composer.phar
+*.zip
+*.tar.gz
+*.rar
+###< Кэш, архивы и локальный инструмент Composer ###
+
+###> Секретные приватные ключи шифрования ###
+/config/jwt/
+/keys.dev
+/keys.tags
+###< Секретные приватные ключи шифрования ###
+
+###> IDEs and OS files ###
+/.idea/
+/.vscode/
+/.DS_Store
+Thumbs.db
+###< IDEs and OS files ###

@@ -1,0 +1,40 @@
+name: Deploy Symfony to SWeb
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload files via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          server-dir: /normvoobsh/irlbp/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/tests/**
+            .env.local
+
+      - name: Execute SSH commands (Composer & Cache)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          script: |
+            cd /normvoobsh/irlbp/
+            composer install --no-dev --optimize-autoloader --no-interaction
+            php bin/console cache:clear --env=prod
+            
