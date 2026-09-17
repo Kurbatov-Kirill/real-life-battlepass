@@ -10,6 +10,6 @@ class TestController
     #[Route('/')]
     public function greet()
     {
-        return new Response('Hello World Fixed!');
+        return new Response('Hello World!');
     }
 }
