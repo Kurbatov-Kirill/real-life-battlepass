@@ -12,7 +12,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via Rsync & Execute Commands
+      - name: Deploy files via Rsync
+        uses: Burnett01/rsync-deployments@v7.0.1
+        with:
+          switches: -avz --delete
+          path: ./
+          remote_path: /home/n/normvoobsh/irlbp/
+          remote_host: ${{ secrets.SFTP_SERVER }}
+          remote_user: ${{ secrets.SFTP_USERNAME }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_port: 22
+          exclude: |
+            .git/
+            .github/
+            .env.local
+            tests/
+
+      - name: Execute Symfony Commands
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SFTP_SERVER }}
@@ -21,13 +37,6 @@ jobs:
           port: 22
           script: |
             cd /home/n/normvoobsh/irlbp/
-            
-            rsync -avz --delete \
-              --exclude='.git/' \
-              --exclude='.github/' \
-              --exclude='.env.local' \
-              --exclude='tests/' \
-              ./ ./
             
             PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
             $PHP_BIN bin/console cache:clear --env=prod
