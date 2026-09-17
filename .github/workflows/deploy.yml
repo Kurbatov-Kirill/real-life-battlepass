@@ -12,25 +12,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via Rsync & Execute Commands
+      - name: Copy files via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "./*"
+          target: "/home/n/normvoobsh/irlbp/"
+          rm: false
+
+      - name: Execute Symfony Commands via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SFTP_SERVER }}
           username: ${{ secrets.SFTP_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          envs: GITHUB_WORKSPACE
           script: |
             cd /home/n/normvoobsh/irlbp/
             
-            rsync -avz --update \
-              --exclude='.git/' \
-              --exclude='.github/' \
-              --exclude='.env.local' \
-              --exclude='tests/' \
-              $GITHUB_WORKSPACE/ ./
-            
             PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
-            
             $PHP_BIN bin/console cache:clear --env=prod
             $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
