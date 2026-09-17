@@ -29,5 +29,5 @@ jobs:
               --exclude='tests/' \
               ./ ./
             
-            /opt/php/81/bin/php bin/console cache:clear --env=prod
-            /opt/php/81/bin/php $(which composer) install --no-dev --optimize-autoloader --no-interaction
+            php bin/console cache:clear --env=prod
+            php composer.phar install --no-dev --optimize-autoloader --no-interaction
