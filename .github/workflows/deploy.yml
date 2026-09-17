@@ -29,6 +29,6 @@ jobs:
               --exclude='tests/' \
               ./ ./
             
-            alias php='/usr/bin/php8.1'
-            php bin/console cache:clear --env=prod
-            php composer.phar install --no-dev --optimize-autoloader --no-interaction
+            PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
+            $PHP_BIN bin/console cache:clear --env=prod
+            $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
