@@ -29,5 +29,5 @@ jobs:
               --exclude='tests/' \
               ./ ./
             
-            php bin/console cache:clear --env=prod
-            composer install --no-dev --optimize-autoloader --no-interaction
+            /usr/local/bin/php8.1 bin/console cache:clear --env=prod
+            /usr/local/bin/php8.1 /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
