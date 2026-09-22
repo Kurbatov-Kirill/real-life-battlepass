@@ -35,6 +35,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: "./*"
+          exclude: |
+            vendor/
+            var/cache/
+            var/log/
+            .git/
+            .github/
           target: "/home/n/normvoobsh/irlbp/"
           rm: false
 
