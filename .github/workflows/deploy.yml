@@ -12,6 +12,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, json
+          ini-values: memory_limit=512M
+
+      - name: Install Composer Dependencies for Build
+        run: composer install --no-interaction --no-scripts
+
+      - name: Build Tailwind & Assets
+        run: |
+          php bin/console tailwind:build --minify
+          php bin/console asset-map:compile
+
       - name: Copy files via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -32,7 +47,6 @@ jobs:
           port: 22
           script: |
             cd /home/n/normvoobsh/irlbp/
-            
             PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
-            $PHP_BIN bin/console cache:clear --env=prod
             $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
+            $PHP_BIN bin/console cache:clear --env=prod
