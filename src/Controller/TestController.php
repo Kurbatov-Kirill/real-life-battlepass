@@ -14,7 +14,7 @@ class TestController extends AbstractController
     public function greet(): Response
     {
         $message = 'Hello World Fixed!';
-        return $this->render('test/test.html.twig',[
+        return $this->render('pages/main/index.html.twig',[
             'message' => $message
         ]);
     }

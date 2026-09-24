@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% set about = 'inc/content/_about_texts.html.twig' %}
+
+{% block title %}Главная - IRL Battlepass{% endblock %}
+
+{% block body %}
+    <h1 class="w-full text-center text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight py-8 text-fuchsia-900">
+        IRL Battlepass
+    </h1>
+    <div class="bg-neutral-100/50 shadow-sm rounded-2xl border border-slate-100 p-6 md:p-10 text-slate-700 w-full max-w-7xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-slate-950 text-center mb-8 tracking-tight">
+            Описание проекта
+        </h2>
+        <div class="space-y-6 text-base md:text-lg leading-relaxed text-justify mb-12">
+            {{ block ('intro', about) }}
+        </div>
+        <div class="space-y-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    {{ block ('main_quest', about) }}
+                </div>
+                <div class="flex justify-center order-first md:order-last">
+                    {# <img src="{{ asset('wiki/wiki_main_quest_demo.png') }}" alt="Основной квест" class="rounded-xl shadow-md max-h-64 object-cover border border-slate-200">  #}
+                </div>
+
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="flex justify-center">
+                    {# <img src="{{ asset('wiki/wiki_side_quest_demo.png') }}" alt="Дополнительный квест" class="rounded-xl shadow-md max-h-64 object-cover border border-slate-200"> #}
+                </div>
+                <div class="space-y-4">
+                    {{  block('side_quest', about) }}
+                </div>
+            </div>
+        </div>
+        <hr class="my-12 border-slate-200">
+        <div class="space-y-6 text-base md:text-lg leading-relaxed text-justify mb-12">
+            {{ block ('points_and_outro', about) }}
+        </div>
+        <div class="flex justify-center pt-8">
+            <form action="{# {{ path('app_challenges')|default('/challenges') }}" class="w-full sm:w-3/5#}">
+                <button type="submit" class="w-full h-16 rounded-xl bg-fuchsia-800 text-base font-bold text-white shadow-md hover:bg-indigo-600 active:scale-95 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-400">
+                    Перейти к списку БП и создать свой!
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -18,7 +18,8 @@
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body class="bg-red-0">
+    <body class="bg-gradient-to-r from-neutral-500 via-fuchsia-100 to-neutral-500">
+        {% block navigaiton %}{{ include('inc/components/_nav.html.twig') }}{% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>
