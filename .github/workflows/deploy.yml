@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.1'
           extensions: mbstring, xml, ctype, iconv, json
           ini-values: memory_limit=512M
 
@@ -55,4 +55,5 @@ jobs:
             cd /home/n/normvoobsh/irlbp/
             PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
             $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
+            $PHP_BIN bin/console doctrine:migrations:migrate --no-interaction --env=prod
             $PHP_BIN bin/console cache:clear --env=prod
