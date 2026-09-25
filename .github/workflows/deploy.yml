@@ -23,6 +23,8 @@ jobs:
         run: composer install --no-interaction --no-scripts
 
       - name: Build Tailwind & Assets
+        env:
+          APP_ENV: prod
         run: |
           php bin/console tailwind:build --minify
           php bin/console asset-map:compile
