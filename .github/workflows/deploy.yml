@@ -58,6 +58,5 @@ jobs:
             cd /home/n/normvoobsh/irlbp/
             PHP_BIN=$(which php8.1 2>/dev/null || find /usr -name "php8.1" -type f -print -quit 2>/dev/null || echo "php")
             $PHP_BIN composer.phar install --no-dev --optimize-autoloader --no-interaction
-            rm -rf var/cache/prod/
             $PHP_BIN bin/console doctrine:migrations:migrate --no-interaction --env=prod
             $PHP_BIN bin/console cache:clear --env=prod
