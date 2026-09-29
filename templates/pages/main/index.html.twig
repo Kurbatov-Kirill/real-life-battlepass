@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% set about = 'inc/content/_about_texts.html.twig' %}
 
-{% block title %}Главная - IRL Battlepass{% endblock %}
+{% block title %}Главная - {{ parent() }}{% endblock %}
 
 {% block body %}
     <h1 class="w-full text-center text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight py-8 text-fuchsia-900">
