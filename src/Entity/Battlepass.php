@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\BattlepassStatus;
 use App\Repository\BattlepassRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -40,6 +41,9 @@ class Battlepass
      */
     #[ORM\OneToMany(targetEntity: Quest::class, mappedBy: 'battlepass', orphanRemoval: true)]
     private Collection $quests;
+
+    #[ORM\Column(length: 20)]
+    private ?BattlepassStatus $status = null;
 
     public function __construct()
     {
@@ -150,6 +154,18 @@ class Battlepass
                 $quest->setBattlepass(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?BattlepassStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(BattlepassStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

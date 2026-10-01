@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Батлпассы - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen text-white p-8">
+
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-black text-neutral-50 border border-gray-950/50 bg-gray-950/25 rounded-sm px-2 shadow-lg">Мои БП</h1>
+            <button onclick="document.getElementById('bp-modal').classList.remove('hidden')" class="bg-fuchsia-800 hover:bg-fuchsia-700 text-white font-bold py-2 px-4 rounded-sm text-sm transition-colors">
+                + Создать новый БП
+            </button>
+        </div>
+        <div id="bp-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div class="bg-gray-300 border border-purple-900/40 p-6 rounded-sm max-w-md w-full relative">
+
+                <h2 class="text-xl font-extrabold mb-4 text-fuchsia-600">Создание нового батлпасса</h2>
+
+                <form action="{{ path('app_battlepass_create') }}" method="POST" class="space-y-4">
+                    <input type="hidden" name="_token" value="{{ csrf_token('battlepass_create') }}">
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-600 font-bold mb-1">Название сезона</label>
+                        <input type="text" name="title" required class="w-full p-2.5 rounded-sm bg-gray-800 border border-purple-900/40 text-white text-sm focus:border-fuchsia-500 outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-slate-600 font-bold mb-1">Старт</label>
+                            <input type="date" name="start_date" required class="w-full p-2.5 rounded-sm bg-gray-800 border border-purple-900/40 text-white text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-slate-600 font-bold mb-1">Конец</label>
+                            <input type="date" name="end_date" required class="w-full p-2.5 rounded-sm bg-gray-800 border border-purple-900/40 text-white text-sm outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-600 font-bold mb-1">Email оппонента</label>
+                        <input type="email" name="opponent_email" required class="w-full p-2.5 rounded-sm bg-gray-800 border border-purple-900/40 text-white text-sm outline-none">
+                    </div>
+
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" onclick="document.getElementById('bp-modal').classList.add('hidden')" class="bg-gray-800 hover:bg-gray-900 text-gray-100 px-4 py-2 rounded-sm text-sm">Отмена</button>
+                        <button type="submit" class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-4 py-2 rounded-sm text-sm font-bold">Создать</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -38,7 +38,7 @@
             {{ block ('points_and_outro', about) }}
         </div>
         <div class="flex justify-center pt-8">
-            <form action="{# {{ path('app_challenges')|default('/challenges') }}" class="w-full sm:w-3/5#}">
+            <form action="{{ path('app_battlepass_index')|default('/battlepasses') }}" class="w-full sm:w-3/5}">
                 <button type="submit" class="w-full h-16 rounded-xl bg-fuchsia-800 text-base font-bold text-white shadow-md hover:bg-indigo-600 active:scale-95 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-400">
                     Перейти к списку БП и создать свой!
                 </button>

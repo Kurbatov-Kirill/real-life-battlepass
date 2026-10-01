@@ -5,43 +5,32 @@
 {% block body %}
     <div class="max-w-7xl mx-auto border border-purple-900/40 rounded-sm p-1 mt-4 bg-gradient-to-br from-gray-500/100 via-gray-900/10 to-fuchsia-900/40">
 
-        <!-- Главный блок профиля -->
         <div class="relative max-w-7xl bg-linear-[115deg,#010001_33%,#220022_55.5%,#aa99aa_56%,#ffbbff_56.5%,transparent_100%] rounded-sm overflow-hidden flex flex-col md:flex-row border border-purple-500/10 min-h-[320px] mx-auto">
 
-            <!-- Левая колонка: Аватарка (фиксированный квадрат) -->
             <div class="w-full md:w-[320px] h-[320px] relative shrink-0 border-r-3 border-fuchsia-50 bg-gray-500">
                 <!--img src="https://placekitten.com" alt="Avatar" class="w-full h-full object-cover"-->
                 <svg class="w-80 h-80 text-slate-400 dark:text-neutral-100/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
-                <!-- Фиолетовое неоновое свечение за аватаркой для атмосферы -->
                 <div class="absolute inset-0 bg-purple-600/10 mix-blend-color-dodge pointer-events-none"></div>
             </div>
 
-            <!-- Правая колонка: Данные пользователя -->
             <div class="flex-1 pt-8 pb-8 flex flex-col justify-between relative">
-
-                <!-- Верхний блок: Никнейм, рейтинг, инпут и описание -->
                 <div class="flex justify-between items-start w-full relative z-10">
-
-                    <!-- 🔥 ЕДИНЫЙ КОНТЕЙНЕР ДЛЯ ЛУЧЕЙ (Плотный стык к аватарке, без отступов) -->
                     <div class="flex-1 flex flex-col gap-1">
 
-                        <!-- 1. Никнейм: луч идет от левого края (от аватарки) наружу -->
                         <div class="bg-linear-[115deg,theme(colors.fuchsia.950/25%)_0%,theme(colors.fuchsia.500/50%)_50%,transparent_95%] py-2 pl-6 pr-4 border-l-2 border-fuchsia-900/30">
                             <h1 class="text-4xl font-black tracking-wide text-slate-50">
                                 {{ profile.username }}
                             </h1>
                         </div>
 
-                        <!-- 2. Плашка места в рейтинге: серебристо-туманный луч от аватарки -->
                         <div class="bg-linear-[115deg,theme(colors.fuchsia.950/25%)_0%,theme(colors.fuchsia.300/100%)_45%,transparent_90%] py-1.5 pl-6 border-l-2 border-slate-900/40">
                             <div class="inline-block bg-linear-[115deg] from-mist-200 via-mist-50 to-mist-400 border border-mist-400 text-slate-900 font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-sm shadow-sm">
                                 #2 в рейтинге
                             </div>
                         </div>
 
-                        <!-- 3. Выбор файла: мягкий фиолетовый луч подсветки от аватарки -->
                         <div class="bg-linear-[115deg,theme(colors.fuchsia.950/25%)_0%,theme(colors.fuchsia.300/100%)_40%,transparent_85%] py-1 pl-6 flex items-center text-xs border-l-2 border-purple-500/20">
                             <label class="bg-white text-gray-900 font-semibold px-4 py-1.5 rounded-sm cursor-pointer hover:bg-slate-100 active:bg-slate-200 transition-all border border-slate-300 shadow-sm">
                                 Выберите файл
@@ -50,9 +39,8 @@
                             <span class="text-gray-950 ml-3 font-medium">Файл не выбран</span>
                         </div>
 
-                    </div> <!-- /Конец контейнера лучей -->
+                    </div>
 
-                    <!-- Правый блок: Описание и кнопка Редактировать (Остается прижат вправо через pr-8) -->
                     <div class="text-right w-[50%] shrink-0 pr-8">
                         <ul class="text-sm text-slate-800 space-y-1 mb-3 list-none">
                             <li>1. Ну, это я</li>
@@ -63,9 +51,9 @@
                             Редактировать ✏️
                         </button>
                     </div>
+
                 </div>
 
-                <!-- Нижний блок: Фиксация побед (прижат к низу) -->
                 <div class="w-full text-right border-t border-purple-900/20 pt-4 mt-auto relative z-10 pr-8">
                     <div class="text-xs uppercase tracking-widest text-slate-900 font-bold mb-1">
                         Побед: <span class="font-black text-slate-50 text-4xl normal-case tracking-normal ml-1">0</span>
@@ -74,7 +62,7 @@
 
             </div>
 
-        </div> <!-- /Главный блок -->
+        </div>
 
     </div>
 {% endblock %}
