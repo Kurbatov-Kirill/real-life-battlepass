@@ -5,18 +5,21 @@ namespace App\Service;
 use App\Entity\Battlepass;
 use App\Entity\Profile;
 use App\Enum\BattlepassStatus;
+use App\Event\BattlepassCreatedEvent;
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BattlepassService
 {
     public function __construct(
         private ProfileRepository $profileRepo,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private EventDispatcherInterface $dispatcher
     ) {}
 
     /**
-     * @throws \InvalidArgumentException если валидация не прошла
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public function create(Profile $creator, string $title, string $targetEmail, string $startDateStr, string $endDateStr):Battlepass
@@ -40,6 +43,11 @@ class BattlepassService
 
         $this->em->persist($battlepass);
         $this->em->flush();
+
+        $this->dispatcher->dispatch(
+            new BattlepassCreatedEvent($battlepass),
+            BattlepassCreatedEvent::NAME
+        );
 
         return $battlepass;
     }

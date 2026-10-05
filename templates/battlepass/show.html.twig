@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ battlepass.title }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen text-white p-6 font-sans">
+
+        <div class="max-w-7xl mx-auto mb-6">
+            <a href="{{ path('app_battlepass_index') }}" class="text-xs text-purple-600 hover:text-purple-500 transition-colors">
+                ← Назад к списку сезонов
+            </a>
+        </div>
+
+        <!-- Главная панель сезона -->
+        <div class="max-w-7xl mx-auto border border-purple-900/30 rounded-sm p-1 bg-taupe-200 shadow-xl mb-8">
+            <div class="relative w-full rounded-sm overflow-hidden p-8 border border-purple-500/10 bg-taupe-100">
+
+            <span class="text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-sm uppercase tracking-wider font-bold">
+                В процессе ⚔️
+            </span>
+
+                <h1 class="text-3xl font-black tracking-wide text-gray-900 mt-3 mb-2">
+                    {{ battlepass.title }}
+                </h1>
+
+                <div class="text-xs text-slate-600 flex flex-wrap gap-x-6 gap-y-2 mt-2">
+                    <span>Ваш оппонент: <strong class="text-purple-700">{{ opponent.username }}</strong></span>
+                    <span>Период проведения: <strong class="text-purple-700 font-mono">{{ battlepass.startAt|date('d.m.Y') }} — {{ battlepass.endAt|date('d.m.Y') }}</strong></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center border border-dashed border-gray-800 p-12 text-gray-600 rounded-sm">
+            <p class="text-sm font-medium">Движок расчета игровых недель и генерации квестов проектируется...</p>
+        </div>
+
+    </div>
+{% endblock %}

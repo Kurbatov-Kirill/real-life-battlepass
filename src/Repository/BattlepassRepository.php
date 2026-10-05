@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Battlepass;
+use App\Entity\Profile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,13 @@ class BattlepassRepository extends ServiceEntityRepository
         parent::__construct($registry, Battlepass::class);
     }
 
-    //    /**
-    //     * @return Battlepass[] Returns an array of Battlepass objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Battlepass
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAllForUser(Profile $user): array
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.player1 = :user OR b.player2 = :user')
+            ->setParameter('user', $user)
+            ->orderBy('b.startAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
